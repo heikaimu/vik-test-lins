@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+
+    .link {
+      display: inline-block;
+      width: 300px;
+      font-size: 18px;
+      text-decoration: none;
+      color: #333;
+      line-height: 2;
+    }
+
+    .link:active {
+      /* 这里定义链接被点击时的样式 */
+      color: red;
+      /* 例如，将文字颜色设置为红色 */
+      text-decoration: underline;
+      /* 例如，添加下划线 */
+      /* 其他样式属性 */
+    }
+
+    .link:hover {
+      color: blue;
+    }
+
+    button {
+      margin-right: 5px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 2px;
+      border: 1px solid #e7e7e7;
+    }
+
+    button.red {
+      background-color: red;
+      color: #fff;
+    }
+
+    button.green {
+      background-color: green;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body id="app">
+
+  <ul>
+    <li v-for="item in list">
+      <a class="link" target="_blank" :href="item.link">{{item.title}}</a>
+      <button :class="{green:isRight(item.id)}" @click="handleCheck(item.id, true)">正确</button>
+      <button :class="{red:isError(item.id)}" @click="handleCheck(item.id, false)">错误</button>
+    </li>
+
+  </ul>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <script>
+    // eslint-disable-next-line no-undef
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        const list = ref([
+          {
+            id: 'a',
+            title: '内裤单人有肤色（新）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-mens-boxer-kiss-lip-gift-for-him-style-underwear-birthday-gifts-for-husband-25vr-ede5-172v-8blh-cen5?preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'b',
+            title: '内裤单人有肤色（新）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-mens-boxer-kiss-lip-gift-for-him-style-underwear-birthday-gifts-for-husband-25vr-ede5-172v-8blh-cen5?preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'c',
+            title: '内裤双人无肤色（新）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-mens-boxer-kiss-lip-gift-for-him-style-underwear-birthday-gifts-for-husband-25vr-ede5-172v-8blh-q0q5-x38p-i0kh-bxxd-fw9s-6qs8?spm=..collection_942f8d07-332c-45ba-8154-ee19a9352a11.collection_detail_1.1&spm_prev=..collection_1c511d13-b3c8-4f6b-a26a-50248bcc8405.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'd',
+            title: '内裤单头平铺（新）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-mens-boxer-love-kiss-gift-for-him-style-underwear-birthday-gifts-for-husband-zggd-n8be-px80-ewmj-hmf7-24rf-oz03-cf49-ojgj?preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'e',
+            title: '内裤（旧）',
+            link: 'https://makemesurprise.myshoplaza.com/collections/boxers-love?spm=..collection_1c511d13-b3c8-4f6b-a26a-50248bcc8405.header_1.1&spm_prev=..collection_942f8d07-332c-45ba-8154-ee19a9352a11.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'f',
+            title: '内裤双人肤色（旧）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-womens-panties-make-my-willy-go-hard-style-underwear-birthday-gifts-for-wife-and-girlfriend?spm=..collection_2a9c1187-ea91-4c71-82dd-87155800965e.collection_detail_1.3&spm_prev=..collection_1c511d13-b3c8-4f6b-a26a-50248bcc8405.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'g',
+            title: '内裤单头平铺（旧）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-face-mens-boxer-big-gift-for-valentines-day-style-underwear-birthday-gifts-for-husband-waistband-text-boxer-gift?spm=..collection_2a9c1187-ea91-4c71-82dd-87155800965e.collection_detail_1.4&spm_prev=..collection_1c511d13-b3c8-4f6b-a26a-50248bcc8405.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'h',
+            title: '标准毯子',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-blankets-personalized-photo-blanket-fleece-spiderboy-spining-painting-style-blanket?spm=..index.home_section_swiper_list_1.1&spm_prev=..product_dbcf3efc-5a90-4305-85ff-d9a87380d7fd.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'i',
+            title: '双人毯子（旧）',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-blankets-personalized-i-love-you-blanket?spm=..collection_1fee5de7-ffdd-42a5-9bc2-19507873b46b.collection_detail_1.3&spm_prev=..product_72ef0d0d-43b0-4923-a310-a8d21d1440c7.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'j',
+            title: '异性抱枕',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-photo-face-pillow-christmas-cute-girl-with-gift-face-pillow-face-picture-pillow-doll-face-body-pillow-personalized-doll?spm=..index.home_section_swiper_list_1.8&spm_prev=..product_4ec96a26-0e30-4549-8053-daad4d69f691.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+          {
+            id: 'k',
+            title: '拼图',
+            link: 'https://makemesurprise.myshoplaza.com/products/custom-blankets-personalized-valentine-photo-blanket-3?spm=..collection_1fee5de7-ffdd-42a5-9bc2-19507873b46b.collection_detail_1.4&spm_prev=..product_72ef0d0d-43b0-4923-a310-a8d21d1440c7.header_1.1&preview_theme_id=16fab9ce-1861-4402-8b52-6024352ec809',
+          },
+        ])
+
+        const resMap = ref({})
+
+        function handleCheck(id, flag) {
+          resMap.value[id] = flag
+        }
+
+        function isRight(id) {
+          if (resMap.value[id] === undefined)
+            return false
+    
+          return resMap.value[id]
+        }
+
+        function isError(id) {
+          if (resMap.value[id] === undefined)
+            return false
+    
+          return !resMap.value[id]
+        }
+
+        return {
+          list,
+          handleCheck,
+          isRight,
+          isError,
+        }
+      },
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
